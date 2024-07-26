@@ -4,7 +4,7 @@ target/
 !**/src/test/**/target/
 
 # environment
-.env
+web/web-admin/src/main/resources/.env
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
