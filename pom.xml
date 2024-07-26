@@ -97,6 +97,14 @@
                 <artifactId>dysmsapi20170525</artifactId>
                 <version>${aliyun.sms.version}</version>
             </dependency>
+
+            <!-- 加载环境变量 -->
+            <dependency>
+                <groupId>io.github.cdimascio</groupId>
+                <artifactId>dotenv-java</artifactId>
+                <version>${dotenv-java.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
