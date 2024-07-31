@@ -26,3 +26,13 @@ logging:
     com.zaxxer.hikari: DEBUG
     org.springframework.jdbc.datasource: DEBUG
 
+minio:
+  endpoint: http://192.168.177.100:9000
+  access-key: ${MINIO_ACCESS_KEY}
+  secret-key: ${MINIO_SECRET_KEY}
+  bucket-name: lease
+
+#调试Knife4j测试页面
+springdoc:
+  default-flat-param-object: true
+
