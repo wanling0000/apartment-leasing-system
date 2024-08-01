@@ -1,20 +1,26 @@
-package com.atguigu.lease;
+package com.atguigu.lease.web.admin.schedule;
 
 import io.github.cdimascio.dotenv.Dotenv;
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.scheduling.annotation.EnableScheduling;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.nio.file.Paths;
 
-@SpringBootApplication
-@MapperScan("com.atguigu.lease.web.admin.mapper")
-@EnableScheduling
-public class AdminWebApplication implements CommandLineRunner {
-    public static void main(String[] args) {
-        String envPath = Paths.get("web/web-admin/src/main/resources").toAbsolutePath().toString();
+import static org.junit.jupiter.api.Assertions.*;
+
+@SpringBootTest
+class ScheduledTasksTest {
+    @Autowired
+    private ScheduledTasks scheduledTasks;
+    @BeforeAll
+    public static void setup() {
+        String currentDir = Paths.get("").toAbsolutePath().toString();
+        System.out.println("Current working directory: " + currentDir);
+
+        // 确保构建正确的路径
+        String envPath = Paths.get(currentDir, "src", "main", "resources").toAbsolutePath().toString();
         System.out.println("Loading .env from: " + envPath);
 
         Dotenv dotenv = Dotenv.configure()
@@ -31,13 +37,17 @@ public class AdminWebApplication implements CommandLineRunner {
         System.out.println("DB_PASSWORD: " + dotenv.get("DB_PASSWORD"));
         System.out.println("MINIO_ACCESS_KEY: " + dotenv.get("MINIO_ACCESS_KEY"));
         System.out.println("MINIO_SECRET_KEY: " + dotenv.get("MINIO_SECRET_KEY"));
-
-        SpringApplication.run(AdminWebApplication.class, args);
     }
 
-    @Override
-    public void run(String... args) throws Exception {
+    @Test
+    void contextLoads() {
         System.out.println("MINIO_ACCESS_KEY: " + System.getProperty("MINIO_ACCESS_KEY"));
         System.out.println("MINIO_SECRET_KEY: " + System.getProperty("MINIO_SECRET_KEY"));
+    }
+
+
+    @Test
+    public void test(){
+        scheduledTasks.checkLeaseStatus();
     }
 }
