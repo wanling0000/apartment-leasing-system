@@ -1,13 +1,14 @@
 package com.atguigu.lease.web.admin.service.impl;
 
-import com.atguigu.lease.model.entity.LeaseAgreement;
-import com.atguigu.lease.web.admin.mapper.LeaseAgreementMapper;
+import com.atguigu.lease.model.entity.*;
+import com.atguigu.lease.web.admin.mapper.*;
 import com.atguigu.lease.web.admin.service.LeaseAgreementService;
 import com.atguigu.lease.web.admin.vo.agreement.AgreementQueryVo;
 import com.atguigu.lease.web.admin.vo.agreement.AgreementVo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,9 +23,48 @@ public class LeaseAgreementServiceImpl extends ServiceImpl<LeaseAgreementMapper,
     @Autowired
     private LeaseAgreementMapper leaseAgreementMapper;
 
+    @Autowired
+    private ApartmentInfoMapper apartmentInfoMapper;
+
+    @Autowired
+    private RoomInfoMapper roomInfoMapper;
+
+    @Autowired
+    private PaymentTypeMapper paymentTypeMapper;
+
+    @Autowired
+    private LeaseTermMapper leaseTermMapper;
+
     @Override
     public IPage<AgreementVo> pageAgreement(Page<AgreementVo> page, AgreementQueryVo queryVo) {
         return leaseAgreementMapper.pageAgreement(page, queryVo);
+    }
+
+    @Override
+    public AgreementVo getAgreementById(Long id) {
+        //1.查询租约信息
+        LeaseAgreement leaseAgreement = leaseAgreementMapper.selectById(id);
+
+        //2.查询公寓信息
+        ApartmentInfo apartmentInfo = apartmentInfoMapper.selectById(id);
+
+        //3.查询房间信息
+        RoomInfo roomInfo = roomInfoMapper.selectById(id);
+
+        //4.查询支付方式
+        PaymentType paymentType = paymentTypeMapper.selectById(id);
+
+        //5.查询租期
+        LeaseTerm leaseTerm = leaseTermMapper.selectById(id);
+
+
+        AgreementVo agreementVo = new AgreementVo();
+        BeanUtils.copyProperties(leaseAgreement, agreementVo);
+        agreementVo.setApartmentInfo(apartmentInfo);
+        agreementVo.setRoomInfo(roomInfo);
+        agreementVo.setPaymentType(paymentType);
+        agreementVo.setLeaseTerm(leaseTerm);
+        return agreementVo;
     }
 }
 
