@@ -5,6 +5,7 @@ target/
 
 # environment
 web/web-admin/src/main/resources/.env
+web/web-app/src/main/resources/.env
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
