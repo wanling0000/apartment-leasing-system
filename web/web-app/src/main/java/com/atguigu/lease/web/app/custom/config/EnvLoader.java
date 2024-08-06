@@ -23,9 +23,9 @@ public class EnvLoader {
 
         String dbUsername = dotenv.get("DB_USERNAME");
         String dbPassword = dotenv.get("DB_PASSWORD");
-//        String aliyunSmsAccessKeyId = dotenv.get("ALIYUN_SMS_ACCESS_KEY_ID");
-//        String aliyunSmsAccessKeySecret = dotenv.get("ALIYUN_SMS_ACCESS_KEY_SECRET");
-//        String aliyunSmsEndpoint = dotenv.get("ALIYUN_SMS_ENDPOINT");
+        String aliyunSmsAccessKeyId = dotenv.get("ALIYUN_SMS_ACCESS_KEY_ID");
+        String aliyunSmsAccessKeySecret = dotenv.get("ALIYUN_SMS_ACCESS_KEY_SECRET");
+        String aliyunSmsEndpoint = dotenv.get("ALIYUN_SMS_ENDPOINT");
 
         if (dbUsername != null) {
             System.setProperty("DB_USERNAME", dbUsername);
@@ -33,19 +33,19 @@ public class EnvLoader {
         if (dbPassword != null) {
             System.setProperty("DB_PASSWORD", dbPassword);
         }
-//        if (aliyunSmsAccessKeyId != null) {
-//            System.setProperty("ALIYUN_SMS_ACCESS_KEY_ID", aliyunSmsAccessKeyId);
-//        }
-//        if (aliyunSmsAccessKeySecret != null) {
-//            System.setProperty("ALIYUN_SMS_ACCESS_KEY_SECRET", aliyunSmsAccessKeySecret);
-//        }
-//        if (aliyunSmsEndpoint != null) {
-//            System.setProperty("ALIYUN_SMS_ENDPOINT", aliyunSmsEndpoint);
-//        }
+        if (aliyunSmsAccessKeyId != null) {
+            System.setProperty("ALIYUN_SMS_ACCESS_KEY_ID", aliyunSmsAccessKeyId);
+        }
+        if (aliyunSmsAccessKeySecret != null) {
+            System.setProperty("ALIYUN_SMS_ACCESS_KEY_SECRET", aliyunSmsAccessKeySecret);
+        }
+        if (aliyunSmsEndpoint != null) {
+            System.setProperty("ALIYUN_SMS_ENDPOINT", aliyunSmsEndpoint);
+        }
 
         // Output testing
-        System.out.println("DB_USERNAME: " + dbUsername);
-        System.out.println("DB_PASSWORD: " + dbPassword);
+//        System.out.println("DB_USERNAME: " + dbUsername);
+//        System.out.println("DB_PASSWORD: " + dbPassword);
 //        System.out.println("ALIYUN_SMS_ACCESS_KEY_ID: " + aliyunSmsAccessKeyId);
 //        System.out.println("ALIYUN_SMS_ACCESS_KEY_SECRET: " + aliyunSmsAccessKeySecret);
 //        System.out.println("ALIYUN_SMS_ENDPOINT: " + aliyunSmsEndpoint);
