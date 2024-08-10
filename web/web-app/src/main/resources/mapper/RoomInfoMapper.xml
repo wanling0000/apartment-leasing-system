@@ -3,5 +3,45 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.atguigu.lease.web.app.mapper.RoomInfoMapper">
+    <resultMap id="RoomItemVo" type="com.atguigu.lease.web.app.vo.room.RoomItemVo">
+        <association property="apartmentInfo" javaType="com.atguigu.lease.model.entity.ApartmentInfo">
 
+        </association>
+        <collection property="graphVoList" ofType="com.atguigu.lease.web.app.vo.graph.GraphVo"
+                    select="selectGraphListByRoomId" column="id"/>
+
+        <collection property="labelInfoList" ofType="com.atguigu.lease.model.entity.LabelInfo"
+                    select="selectLabelInfoListByRoomId" column="id"/>
+
+    </resultMap>
+
+    <select id="pageItem" resultMap="RoomItemVo">
+        select id,
+               room_number,
+               rent,
+               apartment_id
+        from room_info
+        where is_deleted = 0
+          and is_release = 1
+          and id not in (select room_id
+                         from lease_agreement
+                         where is_deleted = 0
+                           and status in (2, 5))
+    </select>
+    <select id="selectGraphListByRoomId" resultType="com.atguigu.lease.web.app.vo.graph.GraphVo">
+        select name, url
+        from graph_info
+        where is_deleted = 0
+          and item_type = 2
+          and item_id = #{id}
+    </select>
+    <select id="selectLabelInfoListByRoomId" resultType="com.atguigu.lease.model.entity.LabelInfo">
+        select id, type, name
+        from label_info
+        where is_deleted = 0
+          and id in (select label_id
+                     from room_label
+                     where is_deleted = 0
+                       and room_id = #{id})
+    </select>
 </mapper>
