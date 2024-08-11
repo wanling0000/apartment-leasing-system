@@ -33,7 +33,7 @@ mybatis-plus:
 logging:
   level:
     com.zaxxer.hikari: DEBUG
-    org.springframework.jdbc.datasource: DEBUG
+
 
 minio:
   endpoint: http://192.168.177.100:9000

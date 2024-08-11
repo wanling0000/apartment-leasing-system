@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FullyQualifiedAnnotationBeanNameGenerator;
 import org.springframework.context.annotation.Import;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
@@ -19,6 +20,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @ComponentScan(
         basePackages = {"com.atguigu.lease.web.app", "com.atguigu.lease.common"},
         nameGenerator = FullyQualifiedAnnotationBeanNameGenerator.class)
+@EnableAsync
 public class AppWebApplication {
 
     public static void main(String[] args) {
